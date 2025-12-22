@@ -1,0 +1,41 @@
+{
+  "name": "nodejs-rbac-api",
+  "version": "1.0.0",
+  "description": "Node.js REST API implementing Role-Based Access Control (RBAC) with JWT authentication",
+  "author": "Md. Zihad",
+  "license": "ISC",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node index.js",
+    "lint": "echo \"Add ESLint\"",
+    "test": "echo \"Tests not implemented yet\" && exit 0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rbac",
+    "authentication",
+    "authorization",
+    "jwt",
+    "mongodb",
+    "mongoose",
+    "backend",
+    "api"
+  ],
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "chalk": "^4.1.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

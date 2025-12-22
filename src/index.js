@@ -1,4 +1,5 @@
 const express = require('express');
+const dbConnect = require('./config/dbConnect')
 const chalk = require('chalk');
 require('dotenv').config();
 
@@ -8,6 +9,9 @@ app.use(express.json())
 
 
 const PORT = process.env.PORT || 7070
+
+
+dbConnect();
 
 
 app.listen(PORT, () => {

@@ -13,7 +13,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        select: false
+        select: false // Mongoose will exclude this field when you query the model.  User.findOne({ username }).select('+password');
     },
     role: {
         type: String,

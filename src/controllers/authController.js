@@ -43,6 +43,50 @@ const register = async (req, res) => {
     }
 };
 
-const login = (req, res) => { };
+const login = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        if (!username) {
+            return res.status(400).json("Username are required");
+        }
+
+        const user = await User.findOne({ username }).select("+password");
+        // Since I keep "select: fasle" in password attribute in User model, so Mongoose excluded this field when you query the model. That’s why bcrypt.compare(password, user.password) was throwing the Illegal arguments error.
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found",
+            });
+        }
+
+        const isMatched = await bcrypt.compare(password, user.password);
+
+        if (!isMatched) {
+            return res.status(400).json({
+                message: "Invalid password",
+            });
+        }
+
+        const token = await jwt.sign(
+            {
+                id: user._id,
+                username: user.username,
+                role: user.role,
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "1h",
+            }
+        );
+
+        res.status(200).json({ token });
+    } catch (error) {
+        console.error("Register error: ", error);
+        return res.status(500).json({
+            message: "Internal server error",
+        });
+    }
+};
 
 module.exports = { register, login };
